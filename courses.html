@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses - SkillNest</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="bg-dark text-white py-3">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="fs-3">SkillNest</h1>
+        <nav>
+          <a href="index.html" class="text-white mx-2">Home</a>
+          <a href="login.html" class="text-white mx-2">Login</a>
+          <a href="register.html" class="text-white mx-2">Register</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Course List -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Courses</h2>
+        <div class="row g-4">
+          <!-- Course 1 -->
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="images/course1.jpg"
+                class="card-img-top course-img"
+                alt="Course"
+                data-link="https://www.coursera.org/specializations/java-programming"
+              />
+              <div class="card-body">
+                <h5 class="card-title">
+                  Java Programming and Software Engineering Fundamentals
+                  Specialization
+                </h5>
+                <p class="card-text">
+                  Explore a Career as a Software Engineer. Learn the basics of
+                  programming and software development.
+                </p>
+                <a
+                  href="https://www.coursera.org/specializations/java-programming"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >Add</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="images/course2.jpg"
+                class="card-img-top course-img"
+                alt="Course"
+                data-link="https://www.simplilearn.com/free-graphic-design-beginner-course-skillup"
+              />
+              <div class="card-body">
+                <h5 class="card-title">UI / UX for Beginners</h5>
+                <p class="card-text">
+                  This free UI UX Design course is taught hands-on by experts.
+                  Cover basic concepts, difference between both, wireframe,
+                  prototype & a lot more. Best for Beginners.
+                </p>
+                <a
+                  href="https://www.simplilearn.com/free-graphic-design-beginner-course-skillup"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >Add</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Course 3 -->
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="images/course3.jpg"
+                class="card-img-top course-img"
+                alt="Course"
+                data-link="https://pll.harvard.edu/course/machine-learning-and-ai-python"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Machine Learning and AI with Python</h5>
+                <p class="card-text">
+                  Learn how to use decision trees, the foundational algorithm
+                  for your understanding of machine learning and artificial
+                  intelligence.
+                </p>
+                <a
+                  href="https://pll.harvard.edu/course/machine-learning-and-ai-python"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >Add</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-3">
+      <div class="container text-center">
+        <p>© 2024 SkillNest. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.querySelectorAll(".btn-primary").forEach((button) => {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+          this.textContent = "Added";
+          this.disabled = true;
+          this.classList.add("btn-success");
+          this.classList.remove("btn-primary");
+        });
+      });
+
+      document.querySelectorAll(".course-img").forEach((image) => {
+        image.addEventListener("click", function () {
+          const courseLink = this.getAttribute("data-link");
+          if (courseLink) {
+            window.open(courseLink, "_blank");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

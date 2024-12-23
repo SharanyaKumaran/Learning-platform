@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillNest - Sign Up & Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f0ff;
+      }
+
+      h1 {
+        font-weight: bold;
+        color: #6a1b9a;
+      }
+
+      .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container .btn-primary {
+        background-color: #6a1b9a;
+        border: none;
+      }
+
+      .form-container .btn-primary:hover {
+        background-color: #8e24aa;
+      }
+
+      .toggle-link {
+        color: #6a1b9a;
+        cursor: pointer;
+      }
+
+      .toggle-link:hover {
+        text-decoration: underline;
+      }
+
+      .password-info {
+        font-size: 14px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <h1 class="text-center mb-4">Welcome to SkillNest</h1>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <!-- Form Container -->
+          <div class="form-container" id="formContainer">
+            <!-- Sign-Up Form -->
+            <form id="signUpForm">
+              <h2 class="text-center">Sign Up</h2>
+              <div class="mb-3">
+                <label for="signupName" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="signupName"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="signupEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="signupEmail"
+                  placeholder="Enter a valid email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="signupPassword" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signupPassword"
+                  placeholder="Create a password"
+                  required
+                />
+                <small class="text-muted"
+                  >Passwords should contain three of the four character types:
+                  uppercase, lowercase, numbers, and symbols.</small
+                >
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <small class="text-muted" id="confirmPasswordError"></small>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign Up
+              </button>
+              <p class="text-center mt-3">
+                Already have an account?
+                <span class="toggle-link" id="showLogin">Log In</span>
+              </p>
+            </form>
+
+            <!-- Login Form -->
+            <form id="loginForm" style="display: none">
+              <h2 class="text-center">Log In</h2>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginEmail"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Log In
+              </button>
+              <p class="text-center mt-3">
+                Don't have an account?
+                <span class="toggle-link" id="showSignUp">Sign Up</span>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="invalidLoginModal"
+      tabindex="-1"
+      aria-labelledby="invalidLoginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="invalidLoginModalLabel">
+              Invalid Credentials
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              The email or password you entered is incorrect. Please try again.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const signUpForm = document.getElementById("signUpForm");
+      const loginForm = document.getElementById("loginForm");
+      const showLogin = document.getElementById("showLogin");
+      const showSignUp = document.getElementById("showSignUp");
+
+      showLogin.addEventListener("click", () => {
+        signUpForm.style.display = "none";
+        loginForm.style.display = "block";
+      });
+
+      showSignUp.addEventListener("click", () => {
+        loginForm.style.display = "none";
+        signUpForm.style.display = "block";
+      });
+
+      const signupPassword = document.getElementById("signupPassword");
+      const confirmPassword = document.getElementById("confirmPassword");
+      const confirmPasswordError = document.getElementById(
+        "confirmPasswordError"
+      );
+
+      confirmPassword.addEventListener("input", () => {
+        if (confirmPassword.value !== signupPassword.value) {
+          confirmPasswordError.textContent = "Passwords do not match!";
+          confirmPassword.setCustomValidity("Passwords do not match.");
+        } else {
+          confirmPasswordError.textContent = "";
+          confirmPassword.setCustomValidity("");
+        }
+      });
+
+      document.getElementById("signUpForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        localStorage.setItem(
+          "userEmail",
+          document.getElementById("signupEmail").value
+        );
+        localStorage.setItem(
+          "userPassword",
+          document.getElementById("signupPassword").value
+        );
+        alert("Sign-Up Successful! Please Log In.");
+        signUpForm.style.display = "none";
+        loginForm.style.display = "block";
+      });
+
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const userEmail = localStorage.getItem("userEmail");
+        const userPassword = localStorage.getItem("userPassword");
+        const enteredEmail = document.getElementById("loginEmail").value;
+        const enteredPassword = document.getElementById("loginPassword").value;
+
+        if (enteredEmail === userEmail && enteredPassword === userPassword) {
+          window.location.href = "home.html";
+        } else {
+          const invalidLoginModal = new bootstrap.Modal(
+            document.getElementById("invalidLoginModal")
+          );
+          invalidLoginModal.show();
+        }
+      });
+    </script>
+  </body>
+</html>
